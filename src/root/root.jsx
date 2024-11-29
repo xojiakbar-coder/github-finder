@@ -1,12 +1,21 @@
+import Layout from "./layout";
+import navbar_items from "../utils/navbar";
 import { Route, Routes } from "react-router-dom";
 
 const Root = () => {
   return (
     <Routes>
-      <Route element={<h1>Navbar</h1>}>
-        <Route path="/" element={<h1 className="text-white">Home</h1>} />
-        <Route path="about" element={<h1>About</h1>} />
-      </Route>
+      {navbar_items.map(({ id, href, element: Element }) => (
+        <Route
+          key={id}
+          path={href}
+          element={
+            <Layout>
+              <Element />
+            </Layout>
+          }
+        />
+      ))}
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>
   );
